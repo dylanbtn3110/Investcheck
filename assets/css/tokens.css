@@ -1,0 +1,91 @@
+/* InvestCheck — Design tokens
+   Fuente: InvestCheck Style Guidelines (cap. 4.1). Nada se diseña con valores "a mano":
+   si un color o tamaño no existe aquí, se propone primero en este archivo y en tokens.json. */
+
+:root {
+  /* Marca */
+  --color-primary: #1d4ed8;        /* Azul Confianza · acciones principales */
+  --color-primary-hover: #1e40af;  /* Hover de botones */
+  --color-primary-dark: #0b1b3f;   /* Azul Noche · títulos, header, fondos de marca */
+  --color-secondary: #0f766e;      /* Verde Verificado · progreso, lección completada */
+  --color-surface-tint: #eff4ff;   /* Azul Niebla · tarjetas destacadas y notas */
+  --color-primary-on-dark: #93b4ff; /* Primario aclarado para fondos oscuros */
+
+  /* Semánticos de riesgo — reservados solo para comunicar riesgo */
+  --color-risk-low: #15803d;
+  --color-risk-low-bg: #dcfce7;
+  --color-risk-medium: #b45309;
+  --color-risk-medium-bg: #fef3c7;
+  --color-risk-high: #b91c1c;
+  --color-risk-high-bg: #fee2e2;
+
+  /* Neutros */
+  --color-ink: #0f172a;            /* Texto principal */
+  --color-gray-600: #475569;       /* Texto secundario */
+  --color-gray-300: #cbd5e1;       /* Bordes de campos */
+  --color-gray-100: #f1f5f9;       /* Separadores y fondos */
+  --color-white: #ffffff;          /* Superficie base */
+
+  /* Tipografía */
+  --font-display: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+
+  /* Escala tipográfica (tamaño / interlineado). Display y H1–H2 se reducen en móvil: ver base.css */
+  --text-display: 3rem;      --leading-display: 3.5rem;    /* 48/56 */
+  --text-h1: 2.25rem;        --leading-h1: 2.75rem;        /* 36/44 */
+  --text-h2: 1.75rem;        --leading-h2: 2.25rem;        /* 28/36 */
+  --text-h3: 1.375rem;       --leading-h3: 1.75rem;        /* 22/28 */
+  --text-body-l: 1.125rem;   --leading-body-l: 1.75rem;    /* 18/28 */
+  --text-body: 1rem;         --leading-body: 1.5rem;       /* 16/24 */
+  --text-label: 0.875rem;    --leading-label: 1.25rem;     /* 14/20 */
+  --text-caption: 0.75rem;   --leading-caption: 1rem;      /* 12/16 */
+
+  /* Espaciado: sistema modular de 8 px (medio paso de 4 px) */
+  --space-xs: 0.25rem;   /* 4  · ícono–texto */
+  --space-sm: 0.5rem;    /* 8  · elementos relacionados */
+  --space-md: 1rem;      /* 16 · padding de campos y tarjetas móviles */
+  --space-lg: 1.5rem;    /* 24 · padding de tarjetas web, gutter */
+  --space-xl: 2rem;      /* 32 · entre grupos */
+  --space-2xl: 3rem;     /* 48 · entre bloques */
+  --space-3xl: 5rem;     /* 80 · entre secciones del landing */
+
+  /* Radios */
+  --radius-badge: 6px;
+  --radius-control: 10px;  /* botones y campos */
+  --radius-card: 16px;
+  --radius-modal: 28px;
+  --radius-pill: 999px;
+
+  /* Elevación: sombras suaves y pocas */
+  --elevation-0: none;
+  --elevation-1: 0 1px 2px rgb(15 23 42 / 6%), 0 2px 8px rgb(15 23 42 / 8%);
+  --elevation-2: 0 4px 12px rgb(15 23 42 / 10%), 0 12px 32px rgb(15 23 42 / 12%);
+
+  /* Layout */
+  --header-height: 4rem;        /* 64 */
+  --container-max: 75rem;       /* 1200 */
+  --target-min: 2.75rem;        /* 44 · objetivo táctil mínimo */
+  --gutter: 1rem;
+  --margin-side: 1rem;
+
+  /* Movimiento */
+  --motion-fast: 150ms;
+  --motion-base: 200ms;
+  --motion-ease: ease-out;
+}
+
+/* Breakpoints (referencia; las media queries no admiten variables):
+   Móvil 360–599 · Tablet 600–1023 · Desktop 1024–1439 · Desktop amplio ≥ 1440 */
+@media (min-width: 600px) {
+  :root { --gutter: 1.5rem; --margin-side: 2rem; }
+}
+@media (min-width: 1440px) {
+  :root { --gutter: 2rem; }
+}
