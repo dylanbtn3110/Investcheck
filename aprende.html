@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aprende · InvestCheck</title>
+  <meta name="description" content="Lecciones breves sobre riesgo, liquidez, rentabilidad y regulación, y un quiz para practicar.">
+  <meta name="theme-color" content="#1D4ED8">
+  <meta property="og:title" content="Aprende · InvestCheck">
+  <meta property="og:description" content="Lecciones breves sobre riesgo, liquidez, rentabilidad y regulación, y un quiz para practicar.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_PE">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&amp;display=block">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html" aria-label="InvestCheck, inicio">
+      <img src="assets/img/isotipo.svg" alt="" width="32" height="32">
+      <span>Invest<strong>Check</strong></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="Principal">
+      <ul>
+        <li><a href="evaluar.html">Evaluar oferta</a></li>
+        <li><a href="aprende.html" aria-current="page">Aprende</a></li>
+        <li><a href="senales.html">Señales de alerta</a></li>
+        <li><a href="verificar.html">Verificar emisor</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+      </ul>
+    </nav>
+    <a class="btn header-cta" href="evaluar.html">Iniciar<span class="long">&nbsp;evaluación</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menú">
+      <span class="icon" aria-hidden="true">menu</span>
+    </button>
+  </div>
+</header>
+
+<main id="contenido">
+<div class="container page-head">
+  <p class="eyebrow">Aprende</p>
+  <h1 style="margin-top: var(--space-sm);">Entiende los términos antes de decidir</h1>
+  <p class="lead">Lecciones breves con ejemplos. Marca las que completes y practica con un quiz al final.</p>
+</div>
+
+<section class="section" style="padding-top: var(--space-md);" aria-labelledby="lecciones-title">
+  <div class="container">
+    <div style="max-width: 48rem;">
+      <div class="card card-tint" style="margin-bottom: var(--space-lg);">
+        <div style="display: flex; justify-content: space-between; gap: var(--space-md); align-items: baseline; flex-wrap: wrap;">
+          <h2 id="lecciones-title" class="t-h3">Tu avance</h2>
+          <p class="label" id="progress-text" role="status">0 de 8 lecciones completadas</p>
+        </div>
+        <div class="progress" style="margin-top: var(--space-sm);" role="progressbar" aria-label="Lecciones completadas" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0" id="progress-bar"><span style="width: 0%;"></span></div>
+        <p class="caption" style="margin-top: var(--space-sm);">Tu avance se guarda solo en este navegador.</p>
+      </div>
+      <details class="accordion" id="riesgo" data-lesson="riesgo">
+        <summary><span class="icon" aria-hidden="true" style="color: var(--color-primary);">warning</span>Riesgo
+          <span class="lesson-status" data-status><span class="icon icon-sm" aria-hidden="true">radio_button_unchecked</span><span class="status-text">Pendiente</span></span>
+          <span class="icon chevron" aria-hidden="true">expand_more</span></summary>
+        <div class="accordion-body">
+          <p><strong style="color: var(--color-ink);">Qué es.</strong> El riesgo es la posibilidad de ganar menos de lo esperado o de perder parte de tu dinero. Toda inversión tiene riesgo.</p>
+          <p><strong style="color: var(--color-ink);">Ejemplo.</strong> Un depósito en un banco supervisado tiene riesgo bajo y rentabilidad modesta. Una oferta que promete 10 % mensual implica un riesgo muy alto.</p>
+          <p><strong style="color: var(--color-ink);">Ten en cuenta.</strong> Cuando alguien promete ganancia sin riesgo, la promesa es falsa o está incompleta.</p>
+          <div class="note"><span class="icon" aria-hidden="true">help</span><p><strong>Pregúntate:</strong> ¿Cuánto podría perder y cuándo me enteraría?</p></div>
+          
+          <button type="button" class="btn btn-secondary" data-complete aria-pressed="false">Marcar como completada</button>
+        </div>
+      </details>
+<details class="accordion" id="rentabilidad" data-lesson="rentabilidad">
+        <summary><span class="icon" aria-hidden="true" style="color: var(--color-primary);">percent</span>Rentabilidad
+          <span class="lesson-status" data-status><span class="icon icon-sm" aria-hidden="true">radio_button_unchecked</span><span class="status-text">Pendiente</span></span>
+          <span class="icon chevron" aria-hidden="true">expand_more</span></summary>
+        <div class="accordion-body">
+          <p><strong style="color: var(--color-ink);">Qué es.</strong> La rentabilidad es cuánto gana tu dinero, expresada como porcentaje en un periodo, por ejemplo “5 % mensual”.</p>
+          <p><strong style="color: var(--color-ink);">Ejemplo.</strong> Una rentabilidad de 10 % mensual equivale a cerca de 214 % al año si se reinvierte cada mes.</p>
+          <p><strong style="color: var(--color-ink);">Ten en cuenta.</strong> Mayor rentabilidad prometida suele significar mayor riesgo. Compara siempre el mismo periodo: mensual con mensual, anual con anual.</p>
+          <div class="note"><span class="icon" aria-hidden="true">help</span><p><strong>Pregúntate:</strong> ¿De dónde sale exactamente esa ganancia?</p></div>
+          
+          <button type="button" class="btn btn-secondary" data-complete aria-pressed="false">Marcar como completada</button>
+        </div>
+      </details>
+<details class="accordion" id="liquidez" data-lesson="liquidez">
+        <summary><span class="icon" aria-hidden="true" style="color: var(--color-primary);">water_drop</span>Liquidez
+          <span class="lesson-status" data-status><span class="icon icon-sm" aria-hidden="true">radio_button_unchecked</span><span class="status-text">Pendiente</span></span>
+          <span class="icon chevron" aria-hidden="true">expand_more</span></summary>
+        <div class="accordion-body">
+          <p><strong style="color: var(--color-ink);">Qué es.</strong> La liquidez es qué tan rápido puedes recuperar tu dinero sin perder valor.</p>
+          <p><strong style="color: var(--color-ink);">Ejemplo.</strong> El dinero en una cuenta de ahorros es muy líquido. Si te piden dejarlo 12 meses sin poder retirarlo, la liquidez es baja.</p>
+          <p><strong style="color: var(--color-ink);">Ten en cuenta.</strong> No confundas liquidez con rentabilidad: una oferta puede prometer mucho y no dejarte retirar.</p>
+          <div class="note"><span class="icon" aria-hidden="true">help</span><p><strong>Pregúntate:</strong> ¿Puedo retirar si lo necesito? ¿Con qué costo?</p></div>
+          
+          <button type="button" class="btn btn-secondary" data-complete aria-pressed="false">Marcar como completada</button>
+        </div>
+      </details>
+<details class="accordion" id="diversificacion" data-lesson="diversificacion">
+        <summary><span class="icon" aria-hidden="true" style="color: var(--color-primary);">account_tree</span>Diversificación
+          <span class="lesson-status" data-status><span class="icon icon-sm" aria-hidden="true">radio_button_unchecked</span><span class="status-text">Pendiente</span></span>
+          <span class="icon chevron" aria-hidden="true">expand_more</span></summary>
+        <div class="accordion-body">
+          <p><strong style="color: var(--color-ink);">Qué es.</strong> Diversificar es repartir tu dinero en distintas opciones para no depender de una sola.</p>
+          <p><strong style="color: var(--color-ink);">Ejemplo.</strong> Poner todos tus ahorros en el negocio de un conocido concentra el riesgo. Repartirlos lo reduce.</p>
+          <p><strong style="color: var(--color-ink);">Ten en cuenta.</strong> La diversificación no elimina el riesgo, pero evita que un solo fracaso lo pierda todo.</p>
+          <div class="note"><span class="icon" aria-hidden="true">help</span><p><strong>Pregúntate:</strong> ¿Qué pasa con mis ahorros si esta opción falla?</p></div>
+          
+          <button type="button" class="btn btn-secondary" data-complete aria-pressed="false">Marcar como completada</button>
+        </div>
+      </details>
+<details class="accordion" id="comisiones" data-lesson="comisiones">
+        <summary><span class="icon" aria-hidden="true" style="color: var(--color-primary);">receipt_long</span>Comisiones
+          <span class="lesson-status" data-status><span class="icon icon-sm" aria-hidden="true">radio_button_unchecked</span><span class="status-text">Pendiente</span></span>
+          <span class="icon chevron" aria-hidden="true">expand_more</span></summary>
+        <div class="accordion-body">
+          <p><strong style="color: var(--color-ink);">Qué es.</strong> Las comisiones son los costos que cobra quien administra o intermedia tu dinero.</p>
+          <p><strong style="color: var(--color-ink);">Ejemplo.</strong> Una comisión de entrada, otra de mantenimiento y otra por retirar pueden reducir mucho lo que ganas.</p>
+          <p><strong style="color: var(--color-ink);">Ten en cuenta.</strong> Pídelas por escrito. Si no te las explican con claridad, es una señal para preguntar más.</p>
+          <div class="note"><span class="icon" aria-hidden="true">help</span><p><strong>Pregúntate:</strong> ¿Qué cobran por entrar, por mantener y por retirar?</p></div>
+          
+          <button type="button" class="btn btn-secondary" data-complete aria-pressed="false">Marcar como completada</button>
+        </div>
+      </details>
+<details class="accordion" id="interes" data-lesson="interes">
+        <summary><span class="icon" aria-hidden="true" style="color: var(--color-primary);">trending_up</span>Interés compuesto
+          <span class="lesson-status" data-status><span class="icon icon-sm" aria-hidden="true">radio_button_unchecked</span><span class="status-text">Pendiente</span></span>
+          <span class="icon chevron" aria-hidden="true">expand_more</span></summary>
+        <div class="accordion-body">
+          <p><strong style="color: var(--color-ink);">Qué es.</strong> El interés compuesto es ganar intereses sobre los intereses anteriores. El efecto crece cada periodo.</p>
+          <p><strong style="color: var(--color-ink);">Ejemplo.</strong> Con tasas muy altas, el crecimiento prometido se vuelve imposible de sostener. Por eso 10 % mensual no es realista.</p>
+          <p><strong style="color: var(--color-ink);">Ten en cuenta.</strong> Entender el interés compuesto te ayuda a ver qué tan grande es una promesa cuando la proyectas a un año.</p>
+          <div class="note"><span class="icon" aria-hidden="true">help</span><p><strong>Pregúntate:</strong> ¿Cuánto sería esta promesa en 12 meses?</p></div>
+          
+          <button type="button" class="btn btn-secondary" data-complete aria-pressed="false">Marcar como completada</button>
+        </div>
+      </details>
+<details class="accordion" id="piramide" data-lesson="piramide">
+        <summary><span class="icon" aria-hidden="true" style="color: var(--color-primary);">change_history</span>Esquema piramidal
+          <span class="lesson-status" data-status><span class="icon icon-sm" aria-hidden="true">radio_button_unchecked</span><span class="status-text">Pendiente</span></span>
+          <span class="icon chevron" aria-hidden="true">expand_more</span></summary>
+        <div class="accordion-body">
+          <p><strong style="color: var(--color-ink);">Qué es.</strong> En un esquema piramidal, las ganancias de los primeros se pagan con el dinero de los nuevos, no con un negocio real.</p>
+          <p><strong style="color: var(--color-ink);">Ejemplo.</strong> Se cae cuando faltan nuevos aportantes. Quienes entran al final suelen perder todo.</p>
+          <p><strong style="color: var(--color-ink);">Ten en cuenta.</strong> Señales típicas: rentabilidad fija y alta, premios por traer personas y poca información sobre el negocio.</p>
+          <div class="note"><span class="icon" aria-hidden="true">help</span><p><strong>Pregúntate:</strong> ¿Mi ganancia depende de un producto real o de que entren más personas?</p></div>
+          
+          <button type="button" class="btn btn-secondary" data-complete aria-pressed="false">Marcar como completada</button>
+        </div>
+      </details>
+<details class="accordion" id="regulacion" data-lesson="regulacion">
+        <summary><span class="icon" aria-hidden="true" style="color: var(--color-primary);">account_balance</span>SMV y SBS
+          <span class="lesson-status" data-status><span class="icon icon-sm" aria-hidden="true">radio_button_unchecked</span><span class="status-text">Pendiente</span></span>
+          <span class="icon chevron" aria-hidden="true">expand_more</span></summary>
+        <div class="accordion-body">
+          <p><strong style="color: var(--color-ink);">Qué es.</strong> La SMV supervisa el mercado de valores. La SBS supervisa bancos, financieras, cajas, aseguradoras y AFP.</p>
+          <p><strong style="color: var(--color-ink);">Ejemplo.</strong> Solo las entidades autorizadas pueden captar dinero del público. Una empresa con RUC no está autorizada por tenerlo.</p>
+          <p><strong style="color: var(--color-ink);">Ten en cuenta.</strong> Consulta siempre sus registros oficiales antes de transferir dinero.</p>
+          <div class="note"><span class="icon" aria-hidden="true">help</span><p><strong>Pregúntate:</strong> ¿En qué registro oficial figura esta empresa?</p></div>
+          <p><a href="verificar.html">Aprende a verificar al emisor</a></p>
+          <button type="button" class="btn btn-secondary" data-complete aria-pressed="false">Marcar como completada</button>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top: 0;" id="quiz" aria-labelledby="quiz-title">
+  <div class="container">
+    <div style="max-width: 48rem;">
+      <div class="section-head">
+        <span class="eyebrow">Practica</span>
+        <h2 id="quiz-title">Quiz de autoevaluación</h2>
+        <p>Seis preguntas para comprobar lo aprendido. Puedes repetirlo cuando quieras.</p>
+      </div>
+      <form id="quiz-form" novalidate>
+        <div id="quiz-root"></div>
+        <noscript><p class="note">El quiz necesita JavaScript activado.</p></noscript>
+        <div class="btn-row" style="margin-top: var(--space-lg);">
+          <button type="submit" class="btn" id="quiz-submit">Comprobar respuestas</button>
+          <button type="button" class="btn btn-tertiary" id="quiz-reset" hidden>Repetir el quiz</button>
+        </div>
+      </form>
+      <div id="quiz-result" style="margin-top: var(--space-lg);" role="status" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer on-dark">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="index.html" aria-label="InvestCheck, inicio">
+          <img src="assets/img/isotipo-negativo.svg" alt="" width="32" height="32">
+          <span>Invest<strong>Check</strong></span>
+        </a>
+        <p style="margin-top: var(--space-md); max-width: 28rem;">Revisa antes de invertir. Una plataforma educativa para entender el riesgo de una oferta antes de comprometer tu dinero.</p>
+      </div>
+      <div>
+        <h2>Plataforma</h2>
+        <ul>
+          <li><a href="evaluar.html">Evaluar oferta</a></li>
+          <li><a href="aprende.html">Aprende</a></li>
+          <li><a href="senales.html">Señales de alerta</a></li>
+          <li><a href="verificar.html">Verificar emisor</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Proyecto</h2>
+        <ul>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="https://github.com/dylanbtn3110/Investcheck" rel="noopener">Código en GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p>InvestCheck es educativa. No es un bróker, no recomienda invertir ni dejar de invertir y no reemplaza a un asesor regulado. Tus respuestas se guardan solo en tu navegador.</p>
+      <p style="margin-top: var(--space-sm);">Proyecto académico · Universidad Peruana de Ciencias Aplicadas · 1ASI0385 IHC y Tecnologías Móviles · 2026-10</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/aprende.js" defer></script>
+</body>
+</html>
