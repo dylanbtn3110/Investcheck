@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Evaluar una oferta · InvestCheck</title>
+  <meta name="description" content="Responde unas preguntas y descubre si una oferta de inversión muestra señales de alerta.">
+  <meta name="theme-color" content="#1D4ED8">
+  <meta property="og:title" content="Evaluar una oferta · InvestCheck">
+  <meta property="og:description" content="Responde unas preguntas y descubre si una oferta de inversión muestra señales de alerta.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_PE">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&amp;display=block">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html" aria-label="InvestCheck, inicio">
+      <img src="assets/img/isotipo.svg" alt="" width="32" height="32">
+      <span>Invest<strong>Check</strong></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="Principal">
+      <ul>
+        <li><a href="evaluar.html" aria-current="page">Evaluar oferta</a></li>
+        <li><a href="aprende.html">Aprende</a></li>
+        <li><a href="senales.html">Señales de alerta</a></li>
+        <li><a href="verificar.html">Verificar emisor</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+      </ul>
+    </nav>
+    <a class="btn header-cta" href="evaluar.html">Iniciar<span class="long"> evaluación</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menú">
+      <span class="icon" aria-hidden="true">menu</span>
+    </button>
+  </div>
+</header>
+
+<main id="contenido">
+<div class="container page-head">
+  <p class="eyebrow">Evaluar oferta</p>
+  <h1 style="margin-top: var(--space-sm);">Evalúa una oferta de inversión</h1>
+  <p class="lead">Responde 4 pasos cortos. Revisamos 6 señales de alerta y te decimos qué verificar. No guardamos tus datos fuera de tu navegador.</p>
+</div>
+
+<section class="section" style="padding-top: var(--space-md);" aria-label="Evaluación">
+  <div class="container">
+    <div style="max-width: 44rem; margin-inline: auto;" id="evaluacion">
+
+      <div class="note" id="draft-note" hidden style="margin-bottom: var(--space-lg);">
+        <span class="icon" aria-hidden="true">history</span>
+        <div>
+          <p>Retomamos tu evaluación donde la dejaste.</p>
+          <button type="button" class="btn btn-tertiary" id="draft-reset" style="margin-top: var(--space-xs); padding-inline: 0;">Empezar de nuevo</button>
+        </div>
+      </div>
+
+      <form id="wizard" novalidate>
+        <div class="stepper">
+          <div class="stepper-label"><span>Paso <strong id="step-now">1</strong> de 4</span><span id="step-name">La oferta</span></div>
+          <div class="stepper-bar" id="stepper-bar" role="progressbar" aria-label="Progreso de la evaluación" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1" aria-valuetext="Paso 1 de 4"><span></span><span></span><span></span><span></span></div>
+        </div>
+
+        <section class="step" data-step="1" aria-labelledby="h-step-1">
+          <h2 id="h-step-1" class="t-h3" tabindex="-1">La oferta</h2>
+          <div class="form-grid" style="margin-top: var(--space-lg);">
+            <div class="field" data-field="amount">
+              <label for="amount">Monto que te piden invertir</label>
+              <div class="input-group"><span class="prefix" aria-hidden="true">S/</span><input class="control" id="amount" name="amount" type="text" inputmode="decimal" autocomplete="off" placeholder="5,000.00" aria-describedby="amount-hint amount-error" required></div>
+              <p class="hint" id="amount-hint">Ingresa el monto total en soles.</p>
+              <p class="error-msg" id="amount-error" role="alert"><span class="icon" aria-hidden="true">error</span><span class="msg">Ingresa un monto mayor a cero.</span></p>
+            </div>
+            <div class="field" data-field="rate">
+              <label for="rate">Rentabilidad prometida</label>
+              <div class="input-group"><input class="control" id="rate" name="rate" type="text" inputmode="decimal" autocomplete="off" placeholder="10" aria-describedby="rate-hint rate-error" required><span class="suffix" aria-hidden="true">%</span></div>
+              <p class="hint" id="rate-hint">¿Cuánto te dijeron que ganarías? La rentabilidad es lo que ganas por tu dinero, como porcentaje.</p>
+              <p class="error-msg" id="rate-error" role="alert"><span class="icon" aria-hidden="true">error</span><span class="msg">Ingresa un porcentaje mayor a cero.</span></p>
+            </div>
+            <fieldset class="field" id="f-period" data-field="period">
+              <legend>¿Cada cuánto te prometen esa ganancia?</legend>
+              <div class="choices" role="group">
+                <label class="choice"><input type="radio" name="period" value="mensual" required><span>Mensual</span></label>
+                <label class="choice"><input type="radio" name="period" value="anual" required><span>Anual</span></label>
+              </div>
+              <p class="error-msg" id="period-error" role="alert"><span class="icon" aria-hidden="true">error</span><span class="msg">Elige el periodo.</span></p>
+            </fieldset>
+          </div>
+        </section>
+
+        <section class="step" data-step="2" aria-labelledby="h-step-2" hidden>
+          <h2 id="h-step-2" class="t-h3" tabindex="-1">Quién la ofrece</h2>
+          <div class="form-grid" style="margin-top: var(--space-lg);">
+            <div class="field" data-field="name">
+              <label for="name">Nombre de la empresa o persona <span class="muted" style="font-weight: 400;">(opcional)</span></label>
+              <input class="control" id="name" name="name" type="text" maxlength="80" autocomplete="off" aria-describedby="name-hint">
+              <p class="hint" id="name-hint">Te ayuda a reconocer esta evaluación en tu historial.</p>
+            </div>
+            <div class="field" data-field="ruc">
+              <label for="ruc">RUC de la empresa <span class="muted" style="font-weight: 400;">(opcional)</span></label>
+              <input class="control" id="ruc" name="ruc" type="text" inputmode="numeric" maxlength="11" autocomplete="off" placeholder="20123456789" aria-describedby="ruc-hint ruc-error">
+              <p class="hint" id="ruc-hint">Tener RUC no significa estar autorizado a captar dinero.</p>
+              <p class="error-msg" id="ruc-error" role="alert"><span class="icon" aria-hidden="true">error</span><span class="msg">El RUC debe tener 11 dígitos.</span></p>
+            </div>
+            <fieldset class="field" id="f-registered" data-field="registered">
+          <legend>¿Figura en los registros de la SMV o la SBS?</legend>
+          <p class="hint" id="registered-hint">La SMV y la SBS son las entidades que supervisan quién puede captar dinero del público. Si no lo has verificado, elige “No sé”.</p>
+          <div class="choices" role="group" aria-labelledby="registered-hint"><label class="choice"><input type="radio" name="registered" value="si" required><span>Sí</span></label><label class="choice"><input type="radio" name="registered" value="no" required><span>No</span></label><label class="choice"><input type="radio" name="registered" value="nose" required><span>No sé</span></label></div>
+          <p class="error-msg" id="registered-error" role="alert"><span class="icon" aria-hidden="true">error</span><span class="msg">Elige una opción.</span></p>
+        </fieldset>
+            <div><a href="verificar.html" target="_blank" rel="noopener" class="btn btn-tertiary" style="padding-inline: 0;"><span class="icon icon-sm" aria-hidden="true">open_in_new</span>Cómo verificar en la SMV y la SBS</a></div>
+          </div>
+        </section>
+
+        <section class="step" data-step="3" aria-labelledby="h-step-3" hidden>
+          <h2 id="h-step-3" class="t-h3" tabindex="-1">Cómo te la presentan</h2>
+          <div class="form-grid" style="margin-top: var(--space-lg);">
+            <fieldset class="field" id="f-pressure" data-field="pressure">
+          <legend>¿Te piden decidir rápido?</legend>
+          <p class="hint" id="pressure-hint">Por ejemplo: “solo hasta el viernes” o “quedan pocos cupos”.</p>
+          <div class="choices" role="group" aria-labelledby="pressure-hint"><label class="choice"><input type="radio" name="pressure" value="si" required><span>Sí</span></label><label class="choice"><input type="radio" name="pressure" value="no" required><span>No</span></label></div>
+          <p class="error-msg" id="pressure-error" role="alert"><span class="icon" aria-hidden="true">error</span><span class="msg">Elige una opción.</span></p>
+        </fieldset>
+            <fieldset class="field" id="f-referrals" data-field="referrals">
+          <legend>¿Ganas más si traes a otras personas?</legend>
+          <p class="hint" id="referrals-hint">Pagos o beneficios por invitar a familiares o amigos.</p>
+          <div class="choices" role="group" aria-labelledby="referrals-hint"><label class="choice"><input type="radio" name="referrals" value="si" required><span>Sí</span></label><label class="choice"><input type="radio" name="referrals" value="no" required><span>No</span></label></div>
+          <p class="error-msg" id="referrals-error" role="alert"><span class="icon" aria-hidden="true">error</span><span class="msg">Elige una opción.</span></p>
+        </fieldset>
+            <fieldset class="field" id="f-guaranteed" data-field="guaranteed">
+          <legend>¿Te aseguran que no hay riesgo de perder?</legend>
+          <p class="hint" id="guaranteed-hint">Frases como “ganancia garantizada” o “inversión 100 % segura”.</p>
+          <div class="choices" role="group" aria-labelledby="guaranteed-hint"><label class="choice"><input type="radio" name="guaranteed" value="si" required><span>Sí</span></label><label class="choice"><input type="radio" name="guaranteed" value="no" required><span>No</span></label></div>
+          <p class="error-msg" id="guaranteed-error" role="alert"><span class="icon" aria-hidden="true">error</span><span class="msg">Elige una opción.</span></p>
+        </fieldset>
+          </div>
+        </section>
+
+        <section class="step" data-step="4" aria-labelledby="h-step-4" hidden>
+          <h2 id="h-step-4" class="t-h3" tabindex="-1">Documentos y revisión</h2>
+          <div class="form-grid" style="margin-top: var(--space-lg);">
+            <fieldset class="field" id="f-contract" data-field="contract">
+          <legend>¿Hay un contrato por escrito?</legend>
+          <p class="hint" id="contract-hint">Un documento con las condiciones, firmado o enviado por la empresa.</p>
+          <div class="choices" role="group" aria-labelledby="contract-hint"><label class="choice"><input type="radio" name="contract" value="si" required><span>Sí</span></label><label class="choice"><input type="radio" name="contract" value="no" required><span>No</span></label></div>
+          <p class="error-msg" id="contract-error" role="alert"><span class="icon" aria-hidden="true">error</span><span class="msg">Elige una opción.</span></p>
+        </fieldset>
+            <div>
+              <h3 class="t-h3" style="font-size: 1.125rem;">Revisa tus respuestas</h3>
+              <dl class="card" id="review" style="margin: var(--space-sm) 0 0; display: grid; gap: var(--space-sm);"></dl>
+            </div>
+          </div>
+        </section>
+
+        <div class="step-actions">
+          <button type="button" class="btn btn-secondary" id="btn-back" hidden>Atrás</button>
+          <button type="submit" class="btn" id="btn-next">Continuar</button>
+        </div>
+      </form>
+
+      <div id="result" hidden aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top: 0;" id="historial" aria-labelledby="historial-title">
+  <div class="container">
+    <div style="max-width: 44rem; margin-inline: auto;">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-md); margin-bottom: var(--space-md);">
+        <h2 id="historial-title"><span class="icon" aria-hidden="true" style="vertical-align: -5px; color: var(--color-primary);">history</span> Historial</h2>
+        <button type="button" class="btn btn-tertiary" id="history-clear" hidden>Borrar historial</button>
+      </div>
+      <p class="muted" style="margin-bottom: var(--space-md);">Se guarda solo en este navegador. Aparecen tus últimas 20 evaluaciones.</p>
+      <div id="history-root"></div>
+    </div>
+  </div>
+</section>
+
+<dialog class="dialog" id="confirm-dialog" aria-labelledby="confirm-title" aria-describedby="confirm-text">
+  <form method="dialog">
+    <h2 id="confirm-title">¿Eliminar?</h2>
+    <p id="confirm-text" class="muted"></p>
+    <div class="actions">
+      <button type="submit" value="cancel" class="btn btn-tertiary" id="confirm-cancel" autofocus>Cancelar</button>
+      <button type="submit" value="ok" class="btn btn-critical" id="confirm-ok">Eliminar</button>
+    </div>
+  </form>
+</dialog>
+</main>
+
+<footer class="site-footer on-dark">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="index.html" aria-label="InvestCheck, inicio">
+          <img src="assets/img/isotipo-negativo.svg" alt="" width="32" height="32">
+          <span>Invest<strong>Check</strong></span>
+        </a>
+        <p style="margin-top: var(--space-md); max-width: 28rem;">Revisa antes de invertir. Una plataforma educativa para entender el riesgo de una oferta antes de comprometer tu dinero.</p>
+      </div>
+      <div>
+        <h2>Plataforma</h2>
+        <ul>
+          <li><a href="evaluar.html">Evaluar oferta</a></li>
+          <li><a href="aprende.html">Aprende</a></li>
+          <li><a href="senales.html">Señales de alerta</a></li>
+          <li><a href="verificar.html">Verificar emisor</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Proyecto</h2>
+        <ul>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="https://github.com/dylanbtn3110/Investcheck" rel="noopener">Código en GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p>InvestCheck es educativa. No es un bróker, no recomienda invertir ni dejar de invertir y no reemplaza a un asesor regulado. Tus respuestas se guardan solo en tu navegador.</p>
+      <p style="margin-top: var(--space-sm);">Proyecto académico · Universidad Peruana de Ciencias Aplicadas · 1ASI0385 IHC y Tecnologías Móviles · 2026-10</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/risk.js" defer></script>
+<script src="assets/js/evaluar.js" defer></script>
+</body>
+</html>

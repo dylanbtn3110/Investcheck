@@ -369,3 +369,11 @@ table { border-collapse: collapse; width: 100%; font-size: var(--text-label); li
 th, td { text-align: left; padding: var(--space-sm) var(--space-md); border-bottom: 1px solid var(--color-gray-100); vertical-align: top; }
 th { background: var(--color-primary-dark); color: var(--color-white); font-weight: var(--weight-semibold); }
 tr:last-child td { border-bottom: 0; }
+
+/* ---------- Impresión / guardar como PDF del resultado ---------- */
+@media print {
+  .site-header, .site-footer, .skip-link, #historial, .page-head .lead, .btn, .stepper { display: none !important; }
+  .result-layout { grid-template-columns: 1fr; }
+  .result-layout .result-card { position: static; box-shadow: none; }
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
