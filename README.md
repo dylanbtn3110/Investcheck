@@ -22,6 +22,39 @@ Curso **1ASI0385 – IHC y Tecnologías Móviles** (NRC 6373, ciclo 2026-10) · 
 | App móvil | Android (Material Design 3) como plataforma principal |
 | Documentación | Informes del trabajo final (TB) |
 
+## Sitio web
+
+Sitio estático (HTML, CSS y JavaScript, sin dependencias ni paso de compilación).
+
+| Página | Qué hace |
+|---|---|
+| `index.html` | Landing Page: hero, problema, cómo funciona, ejemplo de resultado, señales, FAQ |
+| `evaluar.html` | Evaluación en 4 pasos, resultado de riesgo con 6 señales e historial local |
+| `aprende.html` | 8 lecciones con progreso y quiz de autoevaluación |
+| `senales.html` | Las 6 señales: qué son, por qué importan y qué hacer |
+| `verificar.html` | Cómo verificar al emisor en SMV, SBS y SUNAT, y revisor de formato de RUC |
+| `nosotros.html` | Misión, visión, valores, hallazgos de entrevistas y equipo |
+
+```
+assets/css/   tokens.css · base.css · components.css
+assets/js/    main.js · risk.js · evaluar.js · verificar.js · aprende.js
+assets/img/   isotipo, logotipo y favicon en SVG
+tokens.json   mismos tokens que tokens.css, para Figma y las apps
+tests/        pruebas con node:test
+```
+
+**Probar en local:** `npm start` y abrir http://localhost:8000. **Pruebas:** `npm test` (Node 20 o superior).
+
+**Publicar en GitHub Pages:** Settings → Pages → *Deploy from a branch* → rama `main`, carpeta `/ (root)`. El sitio usa rutas relativas, así que funciona bajo `/Investcheck/`.
+
+Notas para el equipo:
+
+- El header y el footer están repetidos en cada `.html`. Si cambias un enlace de navegación, cámbialo en las seis páginas.
+- Los datos del usuario (borrador, historial, avance de lecciones) viven solo en `localStorage`; no hay servidor.
+- Tipografías e íconos se cargan desde Google Fonts (Plus Jakarta Sans, Inter y Material Symbols Rounded).
+- `risk.js` define cómo se calcula el nivel de riesgo. Si se cambian los umbrales, actualizar también `senales.html` y `nosotros.html`.
+- No hay fotografías de personas. Cuando el equipo tenga fotos propias o con licencia, agregarlas con texto alternativo (ver `assets/img/README.md`).
+
 ## Estrategia de ramas
 
 Ver [CONTRIBUTING.md](CONTRIBUTING.md) para el flujo completo.
