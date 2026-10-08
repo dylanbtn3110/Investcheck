@@ -1,0 +1,130 @@
+/* InvestCheck — Base: reset, tipografía, foco, utilidades */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height) + var(--space-md));
+}
+
+body {
+  margin: 0;
+  background: var(--color-white);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  font-weight: var(--weight-regular);
+  font-variant-numeric: tabular-nums; /* cifras tabulares: montos y porcentajes se alinean */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img, svg { display: block; max-width: 100%; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+
+/* Títulos: Plus Jakarta Sans. En móvil la escala baja un paso para no desbordar 360 px */
+h1, h2, h3, h4 {
+  margin: 0;
+  font-family: var(--font-display);
+  color: var(--color-primary-dark);
+  letter-spacing: -0.01em;
+}
+.t-display { font-size: 2.25rem; line-height: 2.75rem; font-weight: var(--weight-extrabold); letter-spacing: -0.02em; }
+h1, .t-h1 { font-size: 1.875rem; line-height: 2.375rem; font-weight: var(--weight-bold); }
+h2, .t-h2 { font-size: 1.5rem; line-height: 2rem; font-weight: var(--weight-bold); }
+h3, .t-h3 { font-size: 1.25rem; line-height: 1.75rem; font-weight: var(--weight-semibold); }
+h4 { font-size: var(--text-body); line-height: var(--leading-body); font-weight: var(--weight-semibold); }
+
+@media (min-width: 600px) {
+  .t-display { font-size: var(--text-display); line-height: var(--leading-display); }
+  h1, .t-h1 { font-size: var(--text-h1); line-height: var(--leading-h1); }
+  h2, .t-h2 { font-size: var(--text-h2); line-height: var(--leading-h2); }
+  h3, .t-h3 { font-size: var(--text-h3); line-height: var(--leading-h3); }
+}
+
+p { margin: 0; }
+.body-l { font-size: var(--text-body-l); line-height: var(--leading-body-l); }
+.caption { font-size: var(--text-caption); line-height: var(--leading-caption); color: var(--color-gray-600); }
+.label { font-size: var(--text-label); line-height: var(--leading-label); font-weight: var(--weight-semibold); }
+.muted { color: var(--color-gray-600); }
+
+/* Líneas de 60–75 caracteres para lectura cómoda */
+.prose { max-width: 68ch; }
+.prose > * + * { margin-top: var(--space-md); }
+
+/* Enlaces: primario y subrayado dentro de párrafos */
+a { color: var(--color-primary); }
+p a, li a, .prose a { text-decoration: underline; text-underline-offset: 3px; }
+a:hover { color: var(--color-primary-hover); }
+
+/* Foco de teclado visible en todos los elementos interactivos */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-badge);
+}
+.on-dark :focus-visible { outline-color: var(--color-white); }
+
+/* Layout */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--margin-side);
+}
+.section { padding-block: var(--space-2xl); }
+@media (min-width: 1024px) { .section { padding-block: var(--space-3xl); } }
+.stack > * + * { margin-top: var(--space-md); }
+.stack-lg > * + * { margin-top: var(--space-xl); }
+
+/* Accesibilidad */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.skip-link {
+  position: absolute; left: var(--space-md); top: -4rem; z-index: 100;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-primary-dark); color: var(--color-white);
+  border-radius: var(--radius-control); text-decoration: none;
+}
+.skip-link:focus { top: var(--space-sm); }
+
+/* Íconos: Material Symbols Rounded (relleno 0, peso 400, 24 px). Siempre acompañan texto. */
+.icon {
+  font-family: "Material Symbols Rounded";
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.5rem;
+  line-height: 1;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: inline-block;
+  flex: none;
+  overflow: hidden;            /* si la fuente no carga, no se muestra el nombre del ícono */
+  white-space: nowrap;
+  letter-spacing: normal;
+  text-transform: none;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  user-select: none;
+}
+.icon-sm { font-size: 1.25rem; width: 1.25rem; height: 1.25rem; }
+
+/* Respeta prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
