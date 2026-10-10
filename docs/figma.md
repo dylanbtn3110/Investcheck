@@ -26,9 +26,27 @@ Cada pantalla es una columna: arriba su **wireframe** (escala de grises) y debaj
 - Los íconos son Material Symbols Rounded; las fuentes, Plus Jakarta Sans e Inter.
 - El sitio web publicado sigue estos diseños; las pantallas de Android aún no tienen código.
 
+## Prototipo y flujos
+
+Los wireframes y mockups están conectados: los botones, el menú, el logo y las pestañas llevan a su
+pantalla. Para recorrerlos, abrir el archivo en Figma, pulsar **Presentar** (▶) y elegir el flujo en
+el selector de la esquina. Cada página tiene sus puntos de inicio, uno por wireframe y otro por mockup:
+
+| Página | Flujos |
+|---|---|
+| Web · Desktop | Landing → evaluación → resultado · Resultado → verificar emisor |
+| Web · Móvil | Inicio → evaluación · Evaluación paso a paso (pasos 1 a 4 y resultado) |
+| Android | Evaluar una oferta · Descartar evaluación · Historial → resultado |
+
+En escritorio la evaluación salta del paso 1 al resultado; el detalle de los 4 pasos está en móvil.
+Figma solo permite enlaces entre pantallas de la misma página.
+
+Diagramas de flujo de usuario (web y Android) en FigJam:
+**[InvestCheck · Flujos de usuario](https://www.figma.com/board/DmJhMwFy2ZeM9t8hjxNwfz)**.
+
 ## Pendiente
 
 - Fotografías de personas peruanas cotidianas (propias o con licencia). No usar personas públicas
   ni inversionistas conocidos.
 - Versión iOS (la guía la documenta solo de forma comparativa).
-- Prototipo navegable (flujos entre pantallas).
+- Prototipo de iOS y flujos entre páginas distintas.
