@@ -34,6 +34,7 @@
         <li><a href="senales.html">Señales de alerta</a></li>
         <li><a href="verificar.html" aria-current="page">Verificar emisor</a></li>
         <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="ayuda.html">Centro de ayuda</a></li>
       </ul>
     </nav>
     <a class="btn header-cta" href="evaluar.html">Iniciar<span class="long">&nbsp;evaluación</span></a>
@@ -96,6 +97,47 @@
   </div>
 </section>
 
+<section class="section" style="padding-top: 0;" aria-labelledby="avanzada-title">
+  <div class="container">
+    <div class="section-head">
+      <h2 id="avanzada-title">Más formas de encontrar al emisor</h2>
+      <p>Estas herramientas te llevan a los registros oficiales. InvestCheck no guarda ni inventa datos: los resultados los muestran la SUNAT y la SMV.</p>
+    </div>
+    <div class="grid grid-3" style="align-items: start;">
+      <div class="card" id="qr-card">
+        <h3><span class="icon" aria-hidden="true">qr_code_scanner</span>Escanear el QR de un folleto</h3>
+        <p>Apunta la cámara al código QR. Si contiene un RUC válido, te llevamos a revisarlo.</p>
+        <div class="btn-row" style="margin-top: var(--space-md);"><button class="btn btn-secondary" type="button" id="qr-start">Escanear QR</button></div>
+        <div class="scan-box" id="qr-box" hidden>
+          <video id="qr-video" playsinline muted aria-label="Vista de la cámara para escanear el código QR"></video>
+          <div class="btn-row" style="margin-top: var(--space-sm);"><button class="btn btn-tertiary" type="button" id="qr-stop">Detener cámara</button></div>
+        </div>
+        <p id="qr-status" role="status" class="caption" style="margin-top: var(--space-sm);">Siempre puedes escribir el RUC a mano en el recuadro de arriba.</p>
+      </div>
+      <div class="card">
+        <h3><span class="icon" aria-hidden="true">search</span>Buscar por nombre comercial</h3>
+        <p>Si no tienes el RUC, búscalo por nombre en la consulta oficial de la SUNAT.</p>
+        <form id="name-form" novalidate style="margin-top: var(--space-md);">
+          <div class="field" id="name-field">
+            <label for="name-input">Nombre comercial</label>
+            <input class="control" id="name-input" type="text" maxlength="80" autocomplete="off" aria-describedby="name-hint name-error">
+            <p class="hint" id="name-hint">Copiamos el nombre para que lo pegues en la SUNAT.</p>
+            <p class="error-msg" id="name-error" role="alert"><span class="icon" aria-hidden="true">error</span><span class="msg">Escribe el nombre de la empresa.</span></p>
+          </div>
+          <button class="btn btn-secondary" type="submit" style="margin-top: var(--space-md);">Buscar en la SUNAT <span class="icon icon-sm" aria-hidden="true">open_in_new</span></button>
+        </form>
+        <p id="name-status" role="status" class="caption" style="margin-top: var(--space-sm);">Si no hay coincidencias, revisa la ortografía o busca por RUC.</p>
+      </div>
+      <div class="card" id="sanciones">
+        <h3><span class="icon" aria-hidden="true">gavel</span>Sanciones públicas</h3>
+        <p>La SMV publica las sanciones firmes que impuso a empresas y personas desde 2008. Búscala por nombre en su consulta oficial.</p>
+        <div class="btn-row" style="margin-top: var(--space-md);"><a class="btn btn-secondary" href="https://www.smv.gob.pe/SERVICIOSANCIONESIMPUESTAS/frm_SancionesEmpresas" target="_blank" rel="noopener noreferrer">Consultar sanciones en la SMV <span class="icon icon-sm" aria-hidden="true">open_in_new</span></a></div>
+        <p class="caption" style="margin-top: var(--space-sm);">No encontrar sanciones no garantiza que la entidad sea legítima. Solo aparecen sanciones firmes en vía administrativa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section" style="padding-top: 0;" aria-labelledby="preguntas-title">
   <div class="container">
     <div class="section-head">
@@ -141,6 +183,7 @@
         <h2>Proyecto</h2>
         <ul>
           <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="ayuda.html">Centro de ayuda</a></li>
           <li><a href="https://github.com/dylanbtn3110/Investcheck" rel="noopener">Código en GitHub</a></li>
         </ul>
       </div>
@@ -153,6 +196,11 @@
 </footer>
 
 <script src="assets/js/main.js" defer></script>
+<script src="assets/js/i18n.js" defer></script>
+<script src="assets/js/risk.js" defer></script>
 <script src="assets/js/verificar.js" defer></script>
+<script src="assets/js/extras-core.js" defer></script>
+<script src="assets/js/ajustes.js" defer></script>
+<script src="assets/js/verificar-extras.js" defer></script>
 </body>
 </html>

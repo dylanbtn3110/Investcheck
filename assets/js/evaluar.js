@@ -8,6 +8,10 @@
   var DRAFT_KEY = 'investcheck.draft';
   var HISTORY_KEY = 'investcheck.history';
   var HISTORY_MAX = 20;
+  var REMINDERS_KEY = 'investcheck.reminders';
+  var RATINGS_KEY = 'investcheck.ratings';
+  var SETTINGS_KEY = 'investcheck.settings';
+  var Core = window.InvestCheckCore;
 
   var STEPS = ['La oferta', 'Quién la ofrece', 'Cómo te la presentan', 'Documentos y revisión'];
   var STEP_FIELDS = {
@@ -44,7 +48,8 @@
     });
     for (var i = 2; i < arguments.length; i++) {
       var c = arguments[i];
-      if (c) node.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
+      if (Array.isArray(c)) c.forEach(function (x) { if (x) node.appendChild(typeof x === 'string' ? document.createTextNode(x) : x); });
+      else if (c) node.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
     }
     return node;
   }
@@ -355,7 +360,7 @@
     var disclaimer = el('div', { class: 'note', style: 'margin-top: var(--gutter);' }, icon('info'),
       el('p', { text: 'Este resultado es educativo. No es una recomendación de inversión ni una opinión legal o financiera.' }));
 
-    resultBox.appendChild(el('div', { class: 'result-layout' }, card, el('div', {}, list, verify, disclaimer)));
+    resultBox.appendChild(el('div', { class: 'result-layout' }, card, el('div', {}, list, verify, similarNote(entry), ratingCard(entry), disclaimer)));
     form.hidden = true;
     resultBox.hidden = false;
     renderHistory();
@@ -403,6 +408,7 @@
           if (!form.hidden) form.elements.amount.focus({ preventScroll: true });
         } })
       ));
+      renderTools();
       return;
     }
 
@@ -418,6 +424,7 @@
         ),
         el('div', { class: 'btn-row', style: 'gap: var(--space-xs);' },
           el('button', { type: 'button', class: 'btn btn-secondary', 'aria-label': 'Ver resultado de ' + title, text: 'Ver resultado', onclick: function () { showResult(entry, true); } }),
+          reminderButton(entry, title),
           el('button', { type: 'button', class: 'btn btn-tertiary', 'aria-label': 'Eliminar ' + title, onclick: function () {
             confirmAction({ title: '¿Eliminar esta evaluación?', text: 'Se borrará de tu historial en este navegador.', ok: 'Eliminar' }).then(function (yes) {
               if (yes) { removeHistory(entry.id); renderHistory(); }
@@ -428,6 +435,7 @@
       ul.appendChild(li);
     });
     historyRoot.appendChild(ul);
+    renderTools();
   }
 
   historyClear.addEventListener('click', function () {
@@ -456,6 +464,258 @@
       dialog.addEventListener('close', onClose);
       dialog.showModal();
     });
+  }
+
+
+  /* ---------- Funciones ampliadas: US24, US25, US27, US29, US44 ---------- */
+
+  function alertsEnabled() {
+    var s = store.get(SETTINGS_KEY, {});
+    return !s || s.alerts !== false;
+  }
+
+  function entryTitle(e) { return e.name || 'Oferta sin nombre'; }
+
+  /* US24: aviso de oferta parecida a una ya evaluada (solo con datos de este navegador) */
+  function similarNote(entry) {
+    if (!Core || !alertsEnabled()) return null;
+    var m = Core.mostSimilar(entry, getHistory());
+    if (!m) return null;
+    return el('div', { class: 'note similar-note', role: 'status' }, icon('compare_arrows'),
+      el('div', {},
+        el('p', {}, el('strong', { text: 'Encontramos una oferta parecida a una que evaluaste. ' }),
+          'Se parece a ' + entryTitle(m.entry) + ' en ' + m.similarity.count + ' de ' + m.similarity.total + ' señales marcadas.'),
+        el('button', { type: 'button', class: 'btn btn-tertiary', style: 'padding-inline: 0;', text: 'Ver comparación', onclick: function () { openCompare(entry.id, m.entry.id); } })
+      ));
+  }
+
+  /* US44: calificar la utilidad del resultado */
+  function ratingCard(entry) {
+    var ratings = store.get(RATINGS_KEY, []);
+    var done = Array.isArray(ratings) && ratings.some(function (r) { return r.id === entry.id; });
+    var box = el('div', { class: 'card', style: 'margin-top: var(--gutter);' });
+    var title = el('h2', { class: 't-h3', id: 'rating-title-' + entry.id, text: '¿Te fue útil este resultado?' });
+    if (done) {
+      box.appendChild(title);
+      box.appendChild(el('p', { role: 'status', text: 'Gracias por tu opinión.' }));
+      return box;
+    }
+    var group = el('div', { class: 'rating choices', role: 'radiogroup', 'aria-labelledby': title.id });
+    var selected = 0;
+    var msg = el('p', { class: 'caption', role: 'status', style: 'margin-top: var(--space-sm);' });
+    var send = el('button', { type: 'button', class: 'btn', style: 'margin-top: var(--space-md);', text: 'Enviar', onclick: function () {
+      if (!selected) { msg.textContent = 'Elige una calificación del 1 al 5.'; return; }
+      var list = store.get(RATINGS_KEY, []);
+      if (!Array.isArray(list)) list = [];
+      list.push({ id: entry.id, score: selected, date: new Date().toISOString() });
+      store.set(RATINGS_KEY, list.slice(-200));
+      box.textContent = '';
+      box.appendChild(title);
+      box.appendChild(el('p', { role: 'status', text: 'Gracias por tu opinión.' }));
+      if (window.InvestCheckAnnounce) window.InvestCheckAnnounce('Gracias por tu opinión');
+    } });
+    [1, 2, 3, 4, 5].forEach(function (n) {
+      var input = el('input', { type: 'radio', name: 'rating-' + entry.id, value: String(n) });
+      input.addEventListener('change', function () { selected = n; msg.textContent = ''; });
+      group.appendChild(el('label', { class: 'choice' }, input, el('span', { 'aria-label': n + ' de 5', text: String(n) })));
+    });
+    box.appendChild(title);
+    box.appendChild(el('p', { class: 'caption', text: '1 = nada útil, 5 = muy útil. Se guarda solo en este navegador.' }));
+    box.appendChild(group);
+    box.appendChild(msg);
+    box.appendChild(send);
+    return box;
+  }
+
+  /* US25: recordatorio para revisar una evaluación antes de la fecha límite */
+  function getReminders() {
+    var r = store.get(REMINDERS_KEY, []);
+    return Array.isArray(r) ? r : [];
+  }
+
+  function reminderButton(entry, title) {
+    var current = getReminders().filter(function (r) { return r.id === entry.id; })[0];
+    return el('button', { type: 'button', class: 'btn btn-tertiary',
+      'aria-label': (current ? 'Cambiar el recordatorio de ' : 'Recordarme revisar ') + title,
+      onclick: function () { openReminder(entry, title, current); } },
+      icon(current ? 'notifications_active' : 'notifications', 'icon-sm'), current ? 'Recordatorio: ' + current.date : 'Recordarme');
+  }
+
+  var reminderDialog = null;
+  function openReminder(entry, title, current) {
+    if (!reminderDialog) {
+      reminderDialog = el('dialog', { class: 'dialog', id: 'reminder-dialog', 'aria-labelledby': 'reminder-title' });
+      document.body.appendChild(reminderDialog);
+    }
+    var d = reminderDialog;
+    d.textContent = '';
+    var today = new Date();
+    var min = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+    var input = el('input', { class: 'control', id: 'reminder-date', type: 'date', min: min });
+    if (current) input.value = current.date;
+    var err = el('p', { class: 'caption', role: 'alert', style: 'color: var(--color-risk-high);' });
+    var form = el('form', { novalidate: '' },
+      el('h2', { id: 'reminder-title', text: 'Recordarme antes de la fecha límite' }),
+      el('p', { class: 'muted', text: title + '. Te avisaremos un día antes, la próxima vez que abras InvestCheck en este navegador.' }),
+      el('div', { class: 'field', style: 'margin-top: var(--space-md);' },
+        el('label', { for: 'reminder-date', text: 'Fecha límite para decidir' }), input, err),
+      el('div', { class: 'actions' },
+        current ? el('button', { type: 'button', class: 'btn btn-tertiary', text: 'Quitar recordatorio', onclick: function () {
+          store.set(REMINDERS_KEY, getReminders().filter(function (r) { return r.id !== entry.id; }));
+          d.close(); renderHistory();
+        } }) : null,
+        el('button', { type: 'button', class: 'btn btn-tertiary', text: 'Cancelar', onclick: function () { d.close(); } }),
+        el('button', { type: 'submit', class: 'btn', text: 'Guardar recordatorio' })
+      )
+    );
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!input.value || input.value < min) { err.textContent = 'Elige una fecha de hoy en adelante.'; input.focus(); return; }
+      var list = getReminders().filter(function (r) { return r.id !== entry.id; });
+      list.push({ id: entry.id, date: input.value });
+      store.set(REMINDERS_KEY, list);
+      d.close(); renderHistory();
+      if (window.InvestCheckAnnounce) window.InvestCheckAnnounce('Recordatorio guardado para el ' + input.value);
+    });
+    d.appendChild(form);
+    if (typeof d.showModal === 'function') d.showModal(); else d.setAttribute('open', '');
+    input.focus();
+  }
+
+  /* US27: comparar dos evaluaciones lado a lado */
+  var compareRoot = document.getElementById('compare-root');
+  var statusInfo = {
+    alert: { cls: 'is-alert', icon: 'close', text: 'Señal de alerta' },
+    ok: { cls: 'is-ok', icon: 'check', text: 'Sin señal' },
+    doubt: { cls: 'is-doubt', icon: 'help', text: 'Por verificar' }
+  };
+
+  function openCompare(idA, idB) {
+    var h = getHistory();
+    compareRoot.textContent = '';
+    compareRoot.appendChild(el('h2', { class: 't-h3', text: 'Comparar evaluaciones' }));
+    if (h.length < 2) {
+      compareRoot.appendChild(el('p', { class: 'muted', role: 'status', text: 'Necesitas dos evaluaciones para comparar.' }));
+      return;
+    }
+    function select(id, label, value) {
+      var s = el('select', { class: 'control', id: id });
+      h.forEach(function (e) {
+        var o = el('option', { value: String(e.id), text: entryTitle(e) + ' · ' + formatDate(e.date) });
+        if (String(e.id) === String(value)) o.selected = true;
+        s.appendChild(o);
+      });
+      return el('div', { class: 'field' }, el('label', { for: id, text: label }), s);
+    }
+    var a = select('cmp-a', 'Evaluación 1', idA || h[0].id);
+    var b = select('cmp-b', 'Evaluación 2', idB || h[1].id);
+    var out = el('div', { 'aria-live': 'polite' });
+    compareRoot.appendChild(el('div', { class: 'compare-controls', style: 'margin-top: var(--space-md);' }, a, b));
+    compareRoot.appendChild(out);
+    function draw() {
+      var ea = h.filter(function (e) { return String(e.id) === a.querySelector('select').value; })[0];
+      var eb = h.filter(function (e) { return String(e.id) === b.querySelector('select').value; })[0];
+      out.textContent = '';
+      if (!ea || !eb) return;
+      if (ea.id === eb.id) { out.appendChild(el('p', { class: 'muted', text: 'Elige dos evaluaciones distintas.' })); return; }
+      var rows = Core.compareRows(ea, eb);
+      function levelCell(e) { var lv = Risk.LEVELS[e.level] || Risk.LEVELS.medium; return el('span', { class: 'badge' }, icon(lv.icon), lv.label + ' (' + e.count + ' de ' + e.total + ')'); }
+      var table = el('table', { class: 'compare-table' },
+        el('caption', { text: 'Comparación por señal' }),
+        el('thead', {}, el('tr', {}, el('th', { scope: 'col', text: 'Señal' }), el('th', { scope: 'col', text: entryTitle(ea) }), el('th', { scope: 'col', text: entryTitle(eb) }))),
+        el('tbody', {},
+          el('tr', {}, el('th', { scope: 'row', text: 'Nivel de riesgo' }), el('td', {}, levelCell(ea)), el('td', {}, levelCell(eb)))
+        )
+      );
+      var tbody = table.querySelector('tbody');
+      rows.forEach(function (r) {
+        function cell(st) { var i = statusInfo[st]; return el('td', {}, el('span', { class: 'cell ' + i.cls }, icon(i.icon, 'icon-sm'), i.text)); }
+        tbody.appendChild(el('tr', {}, el('th', { scope: 'row', text: r.title }), cell(r.a), cell(r.b)));
+      });
+      out.appendChild(table);
+      out.appendChild(el('p', { class: 'caption', style: 'margin-top: var(--space-sm);', text: 'Comparación educativa con los datos que ingresaste. No es una recomendación de inversión.' }));
+    }
+    a.querySelector('select').addEventListener('change', draw);
+    b.querySelector('select').addEventListener('change', draw);
+    draw();
+    compareRoot.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    compareRoot.focus({ preventScroll: true });
+  }
+
+  /* US29: exportar historial en CSV o PDF (impresión) */
+  var exportDialog = null;
+  function openExport() {
+    if (!exportDialog) {
+      exportDialog = el('dialog', { class: 'dialog', id: 'export-dialog', 'aria-labelledby': 'export-title' });
+      document.body.appendChild(exportDialog);
+    }
+    var d = exportDialog;
+    d.textContent = '';
+    var form = el('form', { novalidate: '' },
+      el('h2', { id: 'export-title', text: '¿Qué formato quieres?' }),
+      el('fieldset', { class: 'field', style: 'border:0;padding:0;' },
+        el('legend', { class: 'sr-only', text: 'Formato de exportación' }),
+        el('div', { class: 'choices', role: 'group' },
+          el('label', { class: 'choice' }, el('input', { type: 'radio', name: 'fmt', value: 'csv', checked: '' }), el('span', { text: 'CSV' })),
+          el('label', { class: 'choice' }, el('input', { type: 'radio', name: 'fmt', value: 'pdf' }), el('span', { text: 'PDF' }))
+        )),
+      el('p', { class: 'caption', text: 'El archivo se genera en tu dispositivo. No se envía a ningún servidor.' }),
+      el('div', { class: 'actions' },
+        el('button', { type: 'button', class: 'btn btn-tertiary', text: 'Cancelar', onclick: function () { d.close(); } }),
+        el('button', { type: 'submit', class: 'btn', text: 'Exportar' })
+      ));
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var fmt = form.querySelector('input[name="fmt"]:checked').value;
+      d.close();
+      if (fmt === 'csv') downloadCsv(); else printHistory();
+    });
+    d.appendChild(form);
+    if (typeof d.showModal === 'function') d.showModal(); else d.setAttribute('open', '');
+  }
+
+  function downloadCsv() {
+    var csv = '﻿' + Core.toCsv(getHistory());
+    var blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = el('a', { href: url, download: 'investcheck-historial.csv' });
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    window.setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    if (window.InvestCheckAnnounce) window.InvestCheckAnnounce('Historial exportado en CSV');
+  }
+
+  function printHistory() {
+    var h = getHistory();
+    var box = el('section', { id: 'historial-print' },
+      el('h1', { text: 'Historial de evaluaciones · InvestCheck' }),
+      el('p', { text: 'Generado el ' + formatDate(new Date().toISOString()) + '. InvestCheck es educativa. No recomienda invertir.' }));
+    var table = el('table', { class: 'compare-table' },
+      el('thead', {}, el('tr', {}, ['Fecha', 'Oferta', 'Monto', 'Rentabilidad', 'Riesgo', 'Señales'].map(function (t) { return el('th', { scope: 'col', text: t }); }))));
+    var tb = el('tbody');
+    h.forEach(function (e) {
+      var lv = Risk.LEVELS[e.level] || Risk.LEVELS.medium;
+      tb.appendChild(el('tr', {}, [formatDate(e.date), entryTitle(e), Risk.formatMoney(e.amount), Risk.formatPercent(e.rate) + ' ' + e.period, lv.label, e.count + ' de ' + e.total].map(function (t) { return el('td', { text: t }); })));
+    });
+    table.appendChild(tb);
+    box.appendChild(table);
+    document.getElementById('contenido').appendChild(box);
+    document.body.classList.add('print-history');
+    var cleanup = function () { document.body.classList.remove('print-history'); box.remove(); window.removeEventListener('afterprint', cleanup); };
+    window.addEventListener('afterprint', cleanup);
+    window.print();
+  }
+
+  var toolsRoot = document.getElementById('history-tools');
+  function renderTools() {
+    if (!toolsRoot || !Core) return;
+    var h = getHistory();
+    toolsRoot.textContent = '';
+    if (!h.length) return;
+    toolsRoot.appendChild(el('button', { type: 'button', class: 'btn btn-secondary', onclick: function () { openCompare(); } }, icon('compare_arrows', 'icon-sm'), 'Comparar evaluaciones'));
+    toolsRoot.appendChild(el('button', { type: 'button', class: 'btn btn-secondary', onclick: openExport }, icon('download', 'icon-sm'), 'Exportar historial'));
+    if (compareRoot && h.length < 2) compareRoot.textContent = '';
   }
 
   /* ---------- Inicio ---------- */

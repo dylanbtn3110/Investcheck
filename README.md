@@ -72,3 +72,18 @@ Ver [CONTRIBUTING.md](CONTRIBUTING.md) para el flujo completo.
 | `feature/registry-verification` | Consulta/enlace a registros oficiales SMV y SBS |
 | `feature/android-app` | App Android: navegación inferior, evaluación, resultado, historial, perfil |
 | `docs/trabajo-final` | Informes y entregables del curso (TB1, TB2, …) |
+
+## Funciones ampliadas (US24 a US48)
+
+Además del flujo de evaluación, el sitio incluye (todo en el navegador, sin servidor):
+
+- Evaluar: aviso de oferta parecida, comparar evaluaciones, recordatorios con fecha límite, exportar el historial (CSV o PDF), calificar el resultado y encuesta breve.
+- Ajustes: alto contraste, reducir movimiento, idioma (español, inglés y quechua beta), avisos y tutorial.
+- Centro de ayuda (`ayuda.html`): buscador de preguntas y formulario de soporte.
+- Aprende: pestaña “Casos recientes” con fuentes oficiales de la SMV y la SBS.
+- Señales de alerta: compartir una señal (enlace o imagen).
+- Verificar emisor: escaneo de QR con RUC, búsqueda por nombre en la SUNAT y enlace a las sanciones de la SMV.
+
+No se implementan US26 (necesita servidor) ni las historias de visión a futuro (US36–US38, US41, US49, US50). El quechua es una versión beta y debe revisarla un hablante.
+
+Pruebas: `npm test` (27 pruebas unitarias). La prueba de extremo a extremo está en `tests/e2e/e2e.js` y necesita Playwright y un servidor local (`npm start`).

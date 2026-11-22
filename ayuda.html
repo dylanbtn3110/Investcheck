@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Centro de ayuda · InvestCheck</title>
+  <meta name="description" content="Busca una respuesta, entiende un término o escríbenos si algo no funciona.">
+  <meta name="theme-color" content="#1D4ED8">
+  <meta property="og:title" content="Centro de ayuda · InvestCheck">
+  <meta property="og:description" content="Busca una respuesta, entiende un término o escríbenos si algo no funciona.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_PE">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&amp;display=block">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html" aria-label="InvestCheck, inicio">
+      <img src="assets/img/isotipo.svg" alt="" width="32" height="32">
+      <span>Invest<strong>Check</strong></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="Principal">
+      <ul>
+        <li><a href="evaluar.html">Evaluar oferta</a></li>
+        <li><a href="aprende.html">Aprende</a></li>
+        <li><a href="senales.html">Señales de alerta</a></li>
+        <li><a href="verificar.html">Verificar emisor</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="ayuda.html">Centro de ayuda</a></li>
+      </ul>
+    </nav>
+    <a class="btn header-cta" href="evaluar.html">Iniciar<span class="long">&nbsp;evaluación</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menú">
+      <span class="icon" aria-hidden="true">menu</span>
+    </button>
+  </div>
+</header>
+
+<main id="contenido">
+<div class="container page-head">
+  <p class="eyebrow">Centro de ayuda</p>
+  <h1 style="margin-top: var(--space-sm);">¿En qué te ayudamos?</h1>
+  <p class="lead">Busca un término o una pregunta. Cada respuesta enlaza con la lección donde puedes aprender más.</p>
+</div>
+
+<section class="section" style="padding-top: var(--space-md);" aria-labelledby="buscar-title">
+  <div class="container">
+    <div style="max-width: 48rem;">
+      <h2 id="buscar-title" class="t-h3">Buscar en la ayuda</h2>
+      <div class="field" style="margin-top: var(--space-md);">
+        <label for="faq-search">Busca un término, por ejemplo: rentabilidad anualizada</label>
+        <input class="control" id="faq-search" type="search" autocomplete="off" aria-describedby="faq-count">
+      </div>
+      <p class="caption" id="faq-count" role="status" aria-live="polite" style="margin: var(--space-sm) 0 var(--space-md);"></p>
+      <div id="faq-list"></div>
+      <div class="note" id="faq-empty" hidden style="margin-top: var(--space-md);" role="status"><span class="icon" aria-hidden="true">search_off</span><p>No encontramos eso. Prueba con otra palabra o <a href="#soporte">escríbenos</a>.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top: 0;" id="soporte" aria-labelledby="soporte-title">
+  <div class="container">
+    <div style="max-width: 48rem;">
+      <div class="card card-tint">
+        <h2 id="soporte-title" class="t-h3">Escríbenos</h2>
+        <p class="muted" style="margin: var(--space-sm) 0 var(--space-md);">Cuéntanos qué pasó. No escribas contraseñas, números de tarjeta ni datos de tus inversiones. No guardamos tu mensaje: solo se envía cuando tú decides enviarlo.</p>
+        <form id="support-form" novalidate>
+          <div class="field" id="support-field">
+            <label for="support-msg">¿Qué pasó?</label>
+            <textarea class="control" id="support-msg" rows="5" maxlength="1000" aria-describedby="support-hint support-error" style="min-height: 8rem;"></textarea>
+            <p class="hint" id="support-hint">Hasta 1000 caracteres.</p>
+            <p class="error-msg" id="support-error" role="alert"><span class="icon" aria-hidden="true">error</span><span class="msg">Escribe qué pasó para poder ayudarte.</span></p>
+          </div>
+          <div class="field" style="margin-top: var(--space-md);">
+            <label for="support-mail">Correo para responderte (opcional)</label>
+            <input class="control" id="support-mail" type="email" autocomplete="email" aria-describedby="support-mail-hint">
+            <p class="hint" id="support-mail-hint">Si lo escribes, aparecerá en el mensaje. Los mensajes en GitHub son públicos.</p>
+          </div>
+          <div class="btn-row" style="margin-top: var(--space-md);">
+            <button class="btn" type="submit">Enviar mensaje</button>
+            <button class="btn btn-secondary" type="button" id="support-copy">Copiar mensaje</button>
+          </div>
+        </form>
+        <p id="support-status" role="status" style="margin-top: var(--space-md);"></p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer on-dark">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="index.html" aria-label="InvestCheck, inicio">
+          <img src="assets/img/isotipo-negativo.svg" alt="" width="32" height="32">
+          <span>Invest<strong>Check</strong></span>
+        </a>
+        <p style="margin-top: var(--space-md); max-width: 28rem;">Revisa antes de invertir. Una plataforma educativa para entender el riesgo de una oferta antes de comprometer tu dinero.</p>
+      </div>
+      <div>
+        <h2>Plataforma</h2>
+        <ul>
+          <li><a href="evaluar.html">Evaluar oferta</a></li>
+          <li><a href="aprende.html">Aprende</a></li>
+          <li><a href="senales.html">Señales de alerta</a></li>
+          <li><a href="verificar.html">Verificar emisor</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Proyecto</h2>
+        <ul>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="ayuda.html">Centro de ayuda</a></li>
+          <li><a href="https://github.com/dylanbtn3110/Investcheck" rel="noopener">Código en GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p>InvestCheck es educativa. No es un bróker, no recomienda invertir ni dejar de invertir y no reemplaza a un asesor regulado. Tus respuestas se guardan solo en tu navegador.</p>
+      <p style="margin-top: var(--space-sm);">Proyecto académico · Universidad Peruana de Ciencias Aplicadas · 1ASI0385 IHC y Tecnologías Móviles · 2026-10</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/i18n.js" defer></script>
+<script src="assets/js/risk.js" defer></script>
+<script src="assets/js/verificar.js" defer></script>
+<script src="assets/js/extras-core.js" defer></script>
+<script src="assets/js/ajustes.js" defer></script>
+<script src="assets/js/ayuda.js" defer></script>
+</body>
+</html>

@@ -242,3 +242,88 @@
 
   render();
 })();
+
+/* ---------- Pestañas y feed de casos con fuente pública (US39) ---------- */
+(function () {
+  'use strict';
+
+  var CASES = [
+    { title: 'Forex y CFD: ninguna empresa está autorizada en el Perú', source: 'SMV, comunicado sobre Forex y CFD', date: 'Fecha: ver el documento',
+      text: 'La SMV indica que ninguna empresa en el Perú está autorizada para ofrecer públicamente productos y servicios del mercado Forex, y pide no entregar dinero a ese tipo de empresas.',
+      url: 'https://www.smv.gob.pe/uploads/SobreForexyCFD.pdf', signal: 'regulacion' },
+    { title: 'Criptomonedas y financiamiento con tokens', source: 'SMV, 2021', date: '2021',
+      text: 'La SMV advierte que no existe en el Perú una regulación específica que ampare la oferta o promoción de criptomonedas o tokens, y recomienda informarse antes de participar.',
+      url: 'https://www.gob.pe/institucion/smv/noticias/1121398-advertencia-sobre-la-adquisicion-de-monedas-virtuales-o-criptomonedas-y-la-participacion-en-esquemas-de-financiamiento-por-el-uso-de-tokens', signal: 'regulacion' },
+    { title: 'Captar dinero sin autorización es un delito', source: 'SBS, comunicado de prensa', date: 'Fecha: ver el comunicado',
+      text: 'La SBS advierte sobre entidades que reciben dinero del público sin autorización y que prometen pagar altos intereses como ganancia.',
+      url: 'https://www.sbs.gob.pe/noticia/detallenoticia/idnoticia/3860', signal: 'rentabilidad' },
+    { title: 'Esquemas de informalidad financiera', source: 'SBS, comunicado', date: 'Fecha: ver el comunicado',
+      text: 'La SBS explica cómo reconocer esquemas informales que aparentan ser entidades financieras para captar ahorros.',
+      url: 'https://www.sbs.gob.pe/noticia/detallenoticia/idnoticia/2654', signal: 'regulacion' },
+    { title: 'Las pirámides financieras y la certeza de perder nuestros ahorros', source: 'SBS, Boletín quincenal N.º 11', date: 'Julio de 2017',
+      text: 'La SBS describe cómo funcionan las pirámides: piden incluir a más personas a cambio de mayores ganancias y terminan en pérdida para la mayoría.',
+      url: 'https://www.sbs.gob.pe/Portals/0/jer/BOL-QUINCENAL/20170714_BolQuincenal-N11.pdf', signal: 'referidos' }
+  ];
+
+  var tabL = document.getElementById('tab-lecciones');
+  var tabC = document.getElementById('tab-casos');
+  var panelL = document.getElementById('panel-lecciones');
+  var panelC = document.getElementById('panel-casos');
+  var listC = document.getElementById('casos-list');
+  if (!tabL || !tabC || !panelC) return;
+
+  CASES.forEach(function (c) {
+    var art = document.createElement('article');
+    art.className = 'card';
+    var h = document.createElement('h3');
+    h.textContent = c.title;
+    var meta = document.createElement('p');
+    meta.className = 'case-meta';
+    meta.textContent = c.source + ' · ' + c.date;
+    var p = document.createElement('p');
+    p.textContent = c.text;
+    var row = document.createElement('div');
+    row.className = 'btn-row';
+    row.style.marginTop = 'var(--space-md)';
+    var src = document.createElement('a');
+    src.className = 'btn btn-secondary';
+    src.href = c.url;
+    src.target = '_blank';
+    src.rel = 'noopener noreferrer';
+    src.textContent = 'Leer la fuente oficial';
+    var sig = document.createElement('a');
+    sig.className = 'btn btn-tertiary';
+    sig.href = 'senales.html#' + c.signal;
+    sig.textContent = 'Ver señales de este caso';
+    row.appendChild(src);
+    row.appendChild(sig);
+    art.appendChild(h);
+    art.appendChild(meta);
+    art.appendChild(p);
+    art.appendChild(row);
+    listC.appendChild(art);
+  });
+
+  function select(which, focus) {
+    var cases = which === 'casos';
+    tabL.setAttribute('aria-selected', String(!cases));
+    tabC.setAttribute('aria-selected', String(cases));
+    tabL.tabIndex = cases ? -1 : 0;
+    tabC.tabIndex = cases ? 0 : -1;
+    panelL.hidden = cases;
+    panelC.hidden = !cases;
+    if (focus) (cases ? tabC : tabL).focus();
+  }
+  tabL.addEventListener('click', function () { select('lecciones'); });
+  tabC.addEventListener('click', function () { select('casos'); });
+  [tabL, tabC].forEach(function (t) {
+    t.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { select(t === tabL ? 'casos' : 'lecciones', true); e.preventDefault(); }
+    });
+  });
+  if (location.hash === '#casos') select('casos');
+
+  /* Abre la lección indicada en el enlace (por ejemplo, desde el Centro de ayuda) */
+  var target = location.hash && document.querySelector('details[data-lesson]' + location.hash);
+  if (target) { target.open = true; target.scrollIntoView(); }
+})();
