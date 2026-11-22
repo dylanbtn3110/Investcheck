@@ -79,6 +79,8 @@ a:hover { color: var(--color-primary-hover); }
 }
 .section { padding-block: var(--space-2xl); }
 @media (min-width: 1024px) { .section { padding-block: var(--space-3xl); } }
+/* Sección que sigue a otra: el espacio ya lo da el padding inferior de la anterior */
+.section-flush-top { padding-top: 0; }
 .stack > * + * { margin-top: var(--space-md); }
 .stack-lg > * + * { margin-top: var(--space-xl); }
 
