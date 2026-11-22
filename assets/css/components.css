@@ -167,6 +167,9 @@ a.brand:hover { color: var(--color-primary-dark); }
 .card h3 { display: flex; align-items: center; gap: var(--space-sm); font-size: 1.125rem; line-height: 1.5rem; margin-bottom: var(--space-sm); }
 .card h3 .icon { color: var(--color-primary); }
 .card p { color: var(--color-gray-600); }
+/* Texto de acción al pie de una tarjeta enlazada ("Evaluar una oferta →") */
+.card .card-action { display: flex; align-items: center; gap: var(--space-xs); margin-top: var(--space-md); color: var(--color-primary); font-weight: var(--weight-semibold); }
+.card-link:hover .card-action { color: var(--color-primary-hover); }
 @media (min-width: 600px) { .card { padding: var(--space-lg); } }
 
 .grid { display: grid; gap: var(--gutter); }
