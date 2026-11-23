@@ -29,6 +29,7 @@
     'Plataforma': 'Platform',
     'Proyecto': 'Project',
     'Centro de ayuda': 'Help center',
+    'Contacto': 'Contact',
     'Código en GitHub': 'Code on GitHub',
     'Revisa antes de invertir. Una plataforma educativa para entender el riesgo de una oferta antes de comprometer tu dinero.': 'Check before you invest. An educational platform to understand the risk of an offer before you commit your money.',
     'InvestCheck es educativa. No es un bróker, no recomienda invertir ni dejar de invertir y no reemplaza a un asesor regulado. Tus respuestas se guardan solo en tu navegador.': 'InvestCheck is educational. It is not a broker, it does not recommend investing or not investing, and it does not replace a regulated advisor. Your answers are saved only in your browser.',
