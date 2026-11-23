@@ -35,6 +35,7 @@ a.btn-inverse:hover, .btn-inverse:hover { background: var(--color-surface-tint);
 a.btn-link-inverse:hover, .btn-link-inverse:hover { background: rgb(255 255 255 / 10%); color: var(--color-white); }
 
 .btn-row { display: flex; flex-wrap: wrap; gap: var(--space-sm) var(--space-md); align-items: center; }
+.btn-row.spaced { margin-top: var(--space-xl); }  /* fila de botones debajo de una grilla o de pasos */
 
 /* ---------- Header y navegación ---------- */
 .site-header {
@@ -125,7 +126,7 @@ a.brand:hover { color: var(--color-primary-dark); }
   padding: var(--space-xl) var(--space-lg);
   display: grid; gap: var(--space-xl);
 }
-.hero-card h1 { color: var(--color-white); }
+.hero-card h1 { color: var(--color-white); margin-top: var(--space-sm); }
 .eyebrow {
   font-size: var(--text-caption); line-height: var(--leading-caption); font-weight: var(--weight-bold);
   letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-primary);
@@ -145,6 +146,10 @@ a.brand:hover { color: var(--color-primary-dark); }
   .hero-card { grid-template-columns: 1.15fr 0.85fr; align-items: center; padding: var(--space-3xl) var(--space-2xl); gap: var(--space-2xl); }
   .hero-card .t-display { font-size: var(--text-display); line-height: var(--leading-display); }
 }
+/* Cierre del landing: misma tarjeta del hero, en una columna y centrada */
+.hero-card.cta-card { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+.cta-card h2 { color: var(--color-white); }
+.cta-card .lead { margin-top: 0; }
 
 /* ---------- Encabezados de sección ---------- */
 .section-head { max-width: 46rem; margin-bottom: var(--space-xl); }
@@ -167,6 +172,13 @@ a.brand:hover { color: var(--color-primary-dark); }
 .card h3 { display: flex; align-items: center; gap: var(--space-sm); font-size: 1.125rem; line-height: 1.5rem; margin-bottom: var(--space-sm); }
 .card h3 .icon { color: var(--color-primary); }
 .card p { color: var(--color-gray-600); }
+/* Texto de acción al pie de una tarjeta enlazada ("Evaluar una oferta →") */
+/* Tarjeta destacada con más aire (bloque Aprende del landing) */
+.card.card-feature { padding: var(--space-xl) var(--space-lg); }
+.card-feature .section-head { margin-bottom: var(--space-lg); }
+.card-feature .btn-row { margin-top: var(--space-lg); }
+.card .card-action { display: flex; align-items: center; gap: var(--space-xs); margin-top: var(--space-md); color: var(--color-primary); font-weight: var(--weight-semibold); }
+.card-link:hover .card-action { color: var(--color-primary-hover); }
 @media (min-width: 600px) { .card { padding: var(--space-lg); } }
 
 .grid { display: grid; gap: var(--gutter); }
@@ -316,6 +328,7 @@ select.control { appearance: none; padding-right: 2.5rem; background-image: url(
 .checklist .icon { color: var(--color-secondary); margin-top: 1px; }
 
 /* ---------- Acordeón / lecciones ---------- */
+.faq { max-width: 48rem; }
 details.accordion { border: 1px solid var(--color-gray-300); border-radius: var(--radius-card); background: var(--color-white); }
 details.accordion + details.accordion { margin-top: var(--space-sm); }
 details.accordion > summary {
